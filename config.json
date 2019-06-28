@@ -1,0 +1,6 @@
+{
+  "db": {
+    "type": "mongodb",
+    "connectionstring": "mongodb://localhost:27017/flexyjetcms"
+  }
+}

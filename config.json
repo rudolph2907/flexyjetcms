@@ -1,6 +1,14 @@
 {
-  "db": {
-    "type": "mongodb",
-    "connectionstring": "mongodb://localhost:27017/flexyjetcms"
+  "development": {
+    "db": {
+      "type": "mongodb",
+      "connectionstring": "mongodb://localhost:27017/flexyjetcms"
+    }
+  },
+  "test": {
+    "db": {
+      "type": "mongodb",
+      "connectionstring": "mongodb://localhost:27017/flexyjetcms-test"
+    }
   }
 }

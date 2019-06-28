@@ -33,7 +33,7 @@ class MongoDbDataAdapter {
 
   async remove(collection, id) {
     try {
-      return await this._db.collection(collection).remove({ _id: id });
+      return await this._db.collection(collection).deleteOne({ _id: id });
     } catch (err) {
       console.log(err);
       throw Error(err);

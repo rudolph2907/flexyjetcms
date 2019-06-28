@@ -16,5 +16,9 @@ Some tech in mind:
 - Joi for schema validation
 - Pub/sub Events for each step in managing content
 - Adding middleware before and after managing content
+- Have schema-less store
+- API Key
+- Data Relationships
+- Generate Swagger UI from schema
 
 Contributor, ideas and feedback welcome.

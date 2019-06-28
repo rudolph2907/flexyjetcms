@@ -1,7 +1,7 @@
 const ContentManager = require('./ContentManager');
 let MongoDbDataAdapter = require('./MongoDbDataAdapter');
 let ContentType = require('./ContentType');
-const config = require('./config.json');
+const config = require('./config.json')['development'];
 const events = require('events');
 
 let mongoDbDataAdapter = new MongoDbDataAdapter(config.db.connectionstring);

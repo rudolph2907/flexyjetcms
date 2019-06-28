@@ -1,26 +1,28 @@
-const ContentManager = require('./ContentManager');
-let MongoDbDataAdapter = require('./MongoDbDataAdapter');
-let ContentType = require('./ContentType');
-const config = require('./config.json')['development'];
-const events = require('events');
+const ContentManager = require('./ContentManager')
+let MongoDbDataAdapter = require('./MongoDbDataAdapter')
+let ContentType = require('./ContentType')
+const config = require('./config.json')['development']
+const events = require('events')
 
-let mongoDbDataAdapter = new MongoDbDataAdapter(config.db.connectionstring);
-let eventEmitter = new events.EventEmitter();
+let mongoDbDataAdapter = new MongoDbDataAdapter(
+  config.db.mongodb.connectionstring
+)
+let eventEmitter = new events.EventEmitter()
 
 // eventEmitter.on('before:insert:contenttype', item => {
 //   console.log(item);
 // });
 
 mongoDbDataAdapter.connect().then(function() {
-  let contentManager = new ContentManager(mongoDbDataAdapter, eventEmitter);
+  let contentManager = new ContentManager(mongoDbDataAdapter, eventEmitter)
   let contentTypes = new ContentType(
     contentManager,
     'contenttype',
     [],
     'Content Type',
     'Content Types'
-  );
-  contentTypes.register();
+  )
+  contentTypes.register()
 
   let blogPosts = new ContentType(
     contentManager,
@@ -58,16 +60,17 @@ mongoDbDataAdapter.connect().then(function() {
     ],
     'Blog Post',
     'Blog Posts'
-  );
+  )
   blogPosts.register().then(i => {
     contentManager
       .insert('blogpost', {
         title: 'Hello',
         content: 'Yo',
+        slug: 'yo',
         createdate: new Date()
       })
       .then(result => {
-        console.log(result);
-      });
-  });
-});
+        console.log(result)
+      })
+  })
+})

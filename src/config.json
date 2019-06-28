@@ -1,0 +1,28 @@
+{
+  "development": {
+    "db": {
+      "mongodb": {
+        "connectionstring": "mongodb://localhost:27017/flexyjetcms"
+      },
+      "pg": {
+        "host": "localhost",
+        "user": "postgres",
+        "password": "postgres",
+        "database": "test"
+      }
+    }
+  },
+  "test": {
+    "db": {
+      "mongodb": {
+        "connectionstring": "mongodb://localhost:27017/flexyjetcms"
+      },
+      "pg": {
+        "host": "localhost",
+        "user": "postgres",
+        "password": "postgres",
+        "database": "test"
+      }
+    }
+  }
+}

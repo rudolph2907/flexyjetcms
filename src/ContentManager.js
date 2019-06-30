@@ -8,41 +8,48 @@ class ContentManager {
 
   async insert(collection, item) {
     try {
-      let contenttype = await this._dataAdapter.queryOne('contenttype', {
-        collectionName: collection
-      })
-      if (!contenttype) {
-        throw Error(`Collection with name ${collection} does not exists.`)
-      }
-
-      if (contenttype.fields && contenttype.fields.length > 0) {
-        let schemaObject = {}
-        contenttype.fields.forEach(f => {
-          switch (f.type) {
-            case 'String':
-              schemaObject[f.id] = Joi.string()
-              break
-            case 'DateTime':
-              schemaObject[f.id] = Joi.date()
-              break
-          }
-          if (f.required) {
-            if (schemaObject[f.id]) {
-              schemaObject[f.id] = schemaObject[f.id].required()
-            } else {
-              schemaObject[f.id] = Joi.required()
-            }
-          }
+      if (collection !== 'contenttype') {
+        let contenttype = await this._dataAdapter.queryOne('contenttype', {
+          collectionName: collection
         })
-        const schema = Joi.object().keys(schemaObject)
+        if (!contenttype) {
+          throw Error(`Collection with name ${collection} does not exists.`)
+        }
 
-        const { error } = Joi.validate(item, schema)
-        if (error) {
-          return { invalid: true, error: error }
+        if (contenttype.fields && contenttype.fields.length > 0) {
+          let schemaObject = {}
+          contenttype.fields.forEach(f => {
+            switch (f.type) {
+              case 'String':
+                schemaObject[f.id] = Joi.string()
+                break
+              case 'DateTime':
+                schemaObject[f.id] = Joi.date()
+                break
+            }
+            if (f.required) {
+              if (schemaObject[f.id]) {
+                schemaObject[f.id] = schemaObject[f.id].required()
+              } else {
+                schemaObject[f.id] = Joi.required()
+              }
+            }
+          })
+          const schema = Joi.object().keys(schemaObject)
+
+          const { error } = Joi.validate(item, schema)
+          if (error) {
+            return { invalid: true, error: error }
+          }
         }
       }
 
-      this._eventEmitter.emit(`before:insert:${collection}`, collection, item)
+      this._eventEmitter.emit(
+        'content-event',
+        `before:insert:${collection}`,
+        collection,
+        item
+      )
       let result = await this._dataAdapter.insert(collection, item)
       this._eventEmitter.emit(`after:insert:${collection}`, collection, result)
       return result
@@ -57,9 +64,17 @@ class ContentManager {
     return this._dataAdapter.remove(collection, id)
   }
 
-  getAll(collection) {}
+  async getAll(collection) {
+    return this._dataAdapter.getAll(collection)
+  }
 
-  get(collection, id) {}
+  async get(collection, id) {
+    return this._dataAdapter.get(collection, id)
+  }
+
+  async createTable(collection, fields) {
+    return this._dataAdapter.createTable(collection, fields)
+  }
 
   query(collection, query) {}
 

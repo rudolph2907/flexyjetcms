@@ -1,5 +1,5 @@
 const should = require('chai').should()
-const MongoDbDataAdapter = require('../src/MongoDbDataAdapter')
+const MongoDbDataAdapter = require('../src/adapters/MongoDbDataAdapter')
 const config = require('../src/config.json')['test']
 
 describe('MongoDbDataAdapter Tests', function() {

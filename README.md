@@ -9,7 +9,7 @@ Collections will be separated by entity.
 - Data Adapters should be interchangeable (some features might not be available in all data adapters)
 - An option should be available for adding data to a table that could take schema-less data.
 
-Some tech in mind:
+Some notes:
 
 - MongoDB adapter
 - Knex adapter
@@ -20,5 +20,8 @@ Some tech in mind:
 - API Key
 - Data Relationships
 - Generate Swagger UI from schema
+- Publishable Content Types
+- Content Versioning
+- Export Content CSV/JSON/Excel
 
 Contributor, ideas and feedback welcome.

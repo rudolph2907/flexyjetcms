@@ -1,5 +1,5 @@
 const should = require('chai').should()
-const KnexDataAdapter = require('../src/KnexDataAdapter')
+const KnexDataAdapter = require('../src/adapters/KnexDataAdapter')
 const config = require('../src/config.json')['test']
 
 describe('KnexDataAdapter.spec Tests', function() {

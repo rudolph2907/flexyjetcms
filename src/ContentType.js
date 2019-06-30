@@ -16,14 +16,23 @@ class ContentType {
     this._fields = value
   }
 
-  async register() {
+  async register(createTable) {
     try {
+      if (createTable) {
+        await this._contentManager.createTable(
+          this._collectionName,
+          this._fields
+        )
+      }
+
       let contentType = await this._contentManager.queryOne(this._storeName, {
         collectionName: this._collectionName
       })
       if (!contentType) {
         await this._contentManager.insert(this._storeName, {
-          fields: this._fields,
+          fields: createTable /* SQL */
+            ? JSON.stringify(this._fields)
+            : this._fields,
           singular: this._singular,
           plural: this._plural,
           collectionName: this._collectionName

@@ -30,14 +30,14 @@ let eventEmitter = new events.EventEmitter()
 adapter.connect().then(async () => {
   let contentManager = new ContentManager(adapter, eventEmitter)
   app.ContentManager = contentManager
-  // let contentTypes = new ContentType(
-  //   contentManager,
-  //   'contenttype',
-  //   [],
-  //   'Content Type',
-  //   'Content Types'
-  // )
-  // contentTypes.register()
+  let contentTypes = new ContentType(
+    contentManager,
+    'contenttype',
+    [],
+    'Content Type',
+    'Content Types'
+  )
+  contentTypes.register()
 
   if (config.db[config.db.adapter].createTable) {
     let contentTypeManager = new ContentTypeManager(contentManager)

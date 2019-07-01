@@ -4,7 +4,8 @@ const methodOverride = require('method-override')
 const cors = require('cors')
 const helmet = require('helmet')
 const error = require('../middleware/error')
-const routes = require('../api/routes/v1')
+const routes = require('../api/routes')
+const apiRoutes = require('../api/routes/v1')
 
 /**
  * Express instance
@@ -27,7 +28,9 @@ app.use(helmet())
 app.use(cors())
 
 // mount api v1 routes
-app.use('/v1', routes)
+app.use('/v1', apiRoutes)
+
+app.use('/', routes)
 
 // catch 404 and forward to error handler
 app.use(error.notFound)

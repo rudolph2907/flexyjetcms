@@ -5,7 +5,12 @@ router.hooks = {
   blogpost: {
     before: [
       (req, res, next) => {
-        console.log('Before request 1')
+        if (!req.query.key) {
+          next({
+            message: 'You need an API key',
+            status: 401
+          })
+        }
         next()
       },
       (req, res, next) => {

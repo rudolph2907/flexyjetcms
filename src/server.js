@@ -3,6 +3,7 @@ const ContentManager = require('./ContentManager')
 let ContentType = require('./ContentType')
 let ContentTypeManager = require('./ContentTypeManager')
 let BlogContentType = require('./BlogContentType')
+let UserContentType = require('./UserContentType')
 const config = require('./config.json')['development']
 const events = require('events')
 const logger = require('./config/logger')
@@ -57,6 +58,9 @@ adapter.connect().then(async () => {
         console.log(result)
       })
   })
+
+  let user = new UserContentType(contentManager)
+  user.register(config.db[config.db.adapter].createTable).then(i => {})
 
   app.listen(port, () => logger.info(`Server started on port ${port} (${env})`))
 })

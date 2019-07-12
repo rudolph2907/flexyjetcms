@@ -32,6 +32,8 @@ app.use('/v1', apiRoutes)
 
 app.use('/', routes)
 
+app.use(error.converter)
+
 // catch 404 and forward to error handler
 app.use(error.notFound)
 

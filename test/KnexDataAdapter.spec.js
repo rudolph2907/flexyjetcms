@@ -87,7 +87,8 @@ describe('KnexDataAdapter.spec Tests', function() {
         return adapter.queryOne('test', { test: 1 })
       })
       .then(response => {
-        response.length.should.equal(1)
+        console.log(response)
+        response.should.be.an('object')
         done()
       })
   })
